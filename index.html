@@ -791,13 +791,18 @@
 
             .cta-buttons {
                 flex-direction: column;
-                align-items: stretch;
+                align-items: center;
+                gap: 1rem;
             }
 
             .btn {
-                width: 100%;
+                width: 90%; /* Reduz de 100% para 90% */
+                max-width: 300px; /* Limita a largura máxima */
+                padding: 0.8rem 1.5rem; /* Reduz o padding */
+                font-size: 0.9rem; /* Reduz ligeiramente a fonte */
                 justify-content: center;
             }
+
         }
 
         .fade-in {
