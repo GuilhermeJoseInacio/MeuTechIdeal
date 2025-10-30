@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melhores Produtos e Promoções para seu Setup Gamer</title>
+    <link rel="icon" type="image/png" href="imagens/logoplace.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg-dark: #0a0a0a;
+            --color-bg-darker: #050505;
+            --color-gray-dark: #1a1a1a;
+            --color-gray-medium: #2a2a2a;
+            --color-gray-light: #888888;
+            --color-white: #ffffff;
+            --color-orange: #ff6b35;
+            --color-orange-light: #ff8c5a;
+            --color-orange-dark: #e85a2a;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-bg-dark);
+            color: var(--color-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-orange {
+            color: var(--color-orange);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-gray-dark);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-light) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--color-orange);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-orange);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Quiz Container */
+        .quiz-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 40px;
+        }
+
+        .quiz-container {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--color-gray-dark);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--color-gray-medium);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-header p {
+            color: var(--color-gray-light);
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--color-gray-medium);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-light) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .question-container {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: var(--color-bg-dark);
+            border: 2px solid var(--color-gray-medium);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .option-card:hover::before {
+            left: 100%;
+        }
+
+        .option-card:hover {
+            border-color: var(--color-orange);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .option-card.selected {
+            border-color: var(--color-orange);
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* Added styles for option images instead of emoji icons */
+        .option-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin: 0 auto 1rem;
+            border-radius: 10px;
+        }
+
+        .option-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .option-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--color-gray-medium);
+            color: var(--color-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-gray-light);
+            transform: translateY(-3px);
+        }
+
+        /* Results */
+        .results-container {
+            display: none;
+        }
+
+        .results-container.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .results-header h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: var(--color-gray-dark);
+            border: 2px solid var(--color-gray-medium);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            border-color: var(--color-orange);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Store header section */
+        .product-store-header {
+            padding: 1rem 1.5rem;
+            background: var(--color-bg-dark);
+            border-bottom: 2px solid var(--color-gray-medium);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .store-logo {
+            width: 40px;
+            height: 40px;
+            background: var(--color-white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .store-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .store-text {
+            font-size: 0.9rem;
+            color: var(--color-gray-light);
+            font-weight: 500;
+        }
+
+        .store-name {
+            color: var(--color-orange);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Product image section */
+        .product-image-container {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .product-image {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--color-white);
+            min-height: 2.8rem;
+        }
+
+        /* Price section with discount */
+        .product-pricing {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .product-price-original {
+            font-size: 1rem;
+            color: var(--color-gray-light);
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+
+        .product-price-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .product-discount {
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            color: var(--color-bg-dark);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+        }
+
+        .product-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+            color: var(--color-white);
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .product-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+        }
+
+        .product-link-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Added disclaimer text styling */
+        .product-disclaimer {
+            font-size: 0.7rem;
+            color: #888888;
+            text-align: center;
+            margin-top: 0.75rem;
+            line-height: 1.3;
+        }
+        /* </CHANGE> */
+
+        /* Footer */
+        footer {
+            background: var(--color-bg-darker);
+            padding: 3rem 20px 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-gray-dark);
+            border-radius: 50%;
+            color: var(--color-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--color-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-gray-dark);
+            color: var(--color-gray-light);
+            font-size: 0.9rem;
+        }
+
+        /* PC Components List */
+        .pc-complete-container {
+            background: var(--color-bg-dark);
+            border: 2px solid var(--color-gray-medium);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pc-header {
+            text-align: center;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--color-gray-medium);
+            margin-bottom: 2rem;
+        }
+
+        .pc-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-white);
+        }
+
+        .pc-total-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-orange);
+        }
+
+        .components-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .component-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--color-gray-dark);
+            border: 2px solid var(--color-gray-medium);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .component-item:hover {
+            border-color: var(--color-orange);
+            transform: translateX(5px);
+        }
+
+        .component-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            background: var(--color-bg-dark);
+            border-radius: 8px;
+            padding: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .component-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .component-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        .component-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-orange);
+        }
+
+        .component-link {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+            color: var(--color-white);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .component-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-wrapper {
+                padding: 90px 15px 20px;
+                min-height: auto;
+            }
+
+            .component-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .component-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .component-link {
+                width: 100%;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+		/* ====== SEÇÃO ABOUT ====== */
+		.about {
+		  padding: 100px 20px;
+		  background-color: #0a0a0a;
+		  color: #fff;
+		  text-align: center;
+		}
+
+		.about h1 {
+		  font-size: 2rem;
+		  margin-bottom: 40px;
+		  font-weight: 700;
+		}
+
+		.text-gradient {
+		  background: linear-gradient(90deg, #ff6600, #ff3300);
+		  -webkit-background-clip: text;
+		  -webkit-text-fill-color: transparent;
+		}
+
+		.cta-buttons {
+		  display: flex;
+		  justify-content: center;
+		  flex-wrap: wrap;
+		  gap: 20px;
+		}
+
+		.btn {
+		  display: inline-flex;
+		  align-items: center;
+		  gap: 10px;
+		  padding: 14px 28px;
+		  font-size: 1rem;
+		  font-weight: 600;
+		  border: none;
+		  border-radius: 50px;
+		  cursor: pointer;
+		  transition: all 0.3s ease;
+		  text-decoration: none;
+		}
+
+		.btn-icon {
+		  width: 22px;
+		  height: 22px;
+		}
+		@keyframes pulseGlow {
+		  0% {
+			transform: scale(1);
+			box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+		  }
+		  50% {
+			transform: scale(1.08);
+			box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+		  }
+		  100% {
+			transform: scale(1);
+			box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+		  }
+		}
+
+
+		/* WhatsApp */
+		.btn-whatsapp {
+		  background-color: #25d366;
+		  color: #fff;
+		  animation: pulseGlow 1.8s infinite ease-in-out;
+		  box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+		}
+
+		.btn-whatsapp:hover {
+		  background-color: #1ebe5b;
+		  transform: scale(1.05);
+		}
+
+		/* Telegram */
+		.btn-telegram {
+		  background-color: #0088cc;
+		  color: #fff;
+		  animation: pulseGlow 1.8s infinite ease-in-out;
+		  box-shadow: 0 0 15px rgba(0, 136, 204, 0.4);
+		}
+
+		.btn-telegram:hover {
+		  background-color: #0077b5;
+		  transform: scale(1.05);
+		}
+
+		/* Responsividade */
+		@media (max-width: 600px) {
+		  .about h1 {
+			font-size: 1.6rem;
+		  }
+
+		  .btn {
+			padding: 12px 20px;
+			font-size: 0.9rem;
+		  }
+
+		  .btn-icon {
+			width: 18px;
+			height: 18px;
+		  }
+		}
+
+        /* Coupon Box Styles */
+        .coupon-box {
+            margin-top: 0;
+            padding: 1rem 1.25rem;
+            background: var(--color-bg-dark);
+            border: 3px dashed var(--color-orange);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .coupon-box::before,
+        .coupon-box::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--color-gray-dark);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .coupon-box::before {
+            left: -10px;
+        }
+
+        .coupon-box::after {
+            right: -10px;
+        }
+
+        .coupon-box:hover {
+            background: rgba(255, 107, 53, 0.08);
+            border-color: var(--color-orange-light);
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .coupon-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            flex: 1;
+        }
+
+        .coupon-label {
+            font-weight: 600;
+            color: var(--color-orange);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .coupon-code {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            color: var(--color-white);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .coupon-copy-btn {
+            background: var(--color-orange);
+            border: none;
+            border-radius: 10px;
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-weight: 700;
+            font-size: 0.9rem;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .coupon-copy-btn:hover {
+            background: var(--color-orange-light);
+            transform: scale(1.08);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .coupon-copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .coupon-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .coupon-feedback {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: var(--color-orange);
+            color: var(--color-white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .coupon-feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coupon-feedback::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--color-orange);
+        }
+
+        @media (max-width: 768px) {
+            .coupon-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .coupon-box::before,
+            .coupon-box::after {
+                top: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .coupon-box::after {
+                top: auto;
+                bottom: -10px;
+            }
+
+            .coupon-copy-btn {
+                width: 100%;
+            }
+
+            .coupon-feedback {
+                right: 50%;
+                transform: translateX(50%) translateY(10px);
+            }
+
+            .coupon-feedback.show {
+                transform: translateX(50%) translateY(0);
+            }
+
+            .coupon-feedback::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="imagens/logo.png" alt="Logo Meu Tech Ideal" class="logo-img" style="height: 40px;">
+            </a>
+            <nav>
+                <a href="index.html">Voltar ao Início</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Quiz Section -->
+    <div class="quiz-wrapper">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h1><span class="text-gradient">Melhores Produtos e Promoções para seu Setup Gamer</span></h1>
+                <p>Responda algumas perguntas e encontre os produtos perfeitos com promoções que escolhemos para você!</p>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <div id="quizContent">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+
+            <div class="results-container" id="resultsContainer">
+                <div class="results-header">
+                    <h2><span class="text-gradient">Recomendações para você</span></h2>
+                    <p>Confira os produtos selecionados especialmente para o seu setup!</p>
+                </div>
+                <div class="product-grid" id="productGrid">
+                    <!-- Products will be inserted here -->
+                </div>
+                <div class="quiz-buttons">
+                    <button class="btn btn-secondary" onclick="restartQuiz()">Refazer Perguntas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- chamada Section -->
+    <section class="about" id="about">
+            <h3 style="text-align: center;">
+				Não encontrou o que procurava? <br>
+				Entre para os nossos grupos e acompanhe as <span class="text-gradient">MELHORES OFERTAS E NOVIDADES TECH!</span>
+			</h3>
+            <div class="cta-buttons">
+                <a href="https://whatsapp.com/channel/0029VbBSCTnJUM2YMnTj4338" class="btn btn-whatsapp">
+                    <svg class="btn-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Entrar no grupo WhatsApp
+                </a>
+                <a href="https://t.me/meutechideal" class="btn btn-telegram">
+                    <svg class="btn-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                    Entrar no grupo Telegram
+                </a>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-social">
+                    <a href="https://whatsapp.com/channel/0029VbBSCTnJUM2YMnTj4338" class="social-icon" aria-label="WhatsApp">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/meutechideal" class="social-icon" aria-label="Telegram">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/meutechideal?igsh=MWptNDA2Z3hvb3g5bA==" class="social-icon" aria-label="Instagram">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.073-1.689-.073-4.948 0-3.204.013-3.583.072-4.948.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 <span class="text-orange">Meu Tech Ideal</span> — Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // PRODUCT DATABASE - Easy to edit!
+        const products = {
+            'pc-pronto': [
+                {
+                    name: 'PC Gamer Completo RTX 4060',
+                    price: 'R$ 4.999,00',
+                    originalPrice: 'R$ 6.499,00',
+                    discount: '-23%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/pc-gamer-1',
+                    coupon: 'TECH10',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40',
+                    components: [
+                        {
+                            name: 'Processador AMD Ryzen 5 5600X',
+                            price: 'R$ 899,00',
+                            originalPrice: 'R$ 1.199,00',
+                            discount: '-25%',
+                            image: 'https://via.placeholder.com/100x100?text=CPU',
+                            link: 'https://exemplo.com/processador-1',
+                            coupon: 'CPU5OFF',
+                            store: 'Kabum',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Placa de Vídeo RTX 4060 8GB',
+                            price: 'R$ 2.199,00',
+                            originalPrice: 'R$ 2.799,00',
+                            discount: '-21%',
+                            image: 'https://via.placeholder.com/100x100?text=GPU',
+                            link: 'https://exemplo.com/gpu-1',
+                            store: 'Pichau',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Placa-Mãe B550 Gaming',
+                            price: 'R$ 899,00',
+                            originalPrice: 'R$ 1.099,00',
+                            discount: '-18%',
+                            image: 'https://via.placeholder.com/100x100?text=Placa-Mae',
+                            link: 'https://exemplo.com/placa-mae-1',
+                            store: 'Terabyte',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Memória RAM 16GB (2x8GB) 3200MHz',
+                            price: 'R$ 299,00',
+                            originalPrice: 'R$ 449,00',
+                            discount: '-33%',
+                            image: 'https://via.placeholder.com/100x100?text=RAM',
+                            link: 'https://exemplo.com/ram-1',
+                            coupon: 'RAM15',
+                            store: 'Kabum',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'SSD NVMe 1TB PCIe 4.0',
+                            price: 'R$ 449,00',
+                            originalPrice: 'R$ 599,00',
+                            discount: '-25%',
+                            image: 'https://via.placeholder.com/100x100?text=SSD',
+                            link: 'https://exemplo.com/ssd-1',
+                            store: 'Amazon',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Fonte 650W 80 Plus Bronze Modular',
+                            price: 'R$ 399,00',
+                            originalPrice: 'R$ 549,00',
+                            discount: '-27%',
+                            image: 'https://via.placeholder.com/100x100?text=Fonte',
+                            link: 'https://exemplo.com/fonte-1',
+                            store: 'Pichau',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Gabinete Gamer Mid Tower RGB',
+                            price: 'R$ 349,00',
+                            originalPrice: 'R$ 499,00',
+                            discount: '-30%',
+                            image: 'https://via.placeholder.com/100x100?text=Gabinete',
+                            link: 'https://exemplo.com/gabinete-1',
+                            store: 'Terabyte',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        }
+                    ]
+                },
+                {
+                    name: 'PC Gamer AMD Ryzen 5 + RX 6600',
+                    price: 'R$ 3.799,00',
+                    originalPrice: 'R$ 4.999,00',
+                    discount: '-24%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/pc-gamer-2',
+                    store: 'Mercado Livre',
+                    storeLogo: '/placeholder.svg?height=40&width=40',
+                    components: [
+                        {
+                            name: 'Processador AMD Ryzen 5 5600',
+                            price: 'R$ 749,00',
+                            originalPrice: 'R$ 999,00',
+                            discount: '-25%',
+                            image: 'https://via.placeholder.com/100x100?text=CPU',
+                            link: 'https://exemplo.com/processador-3',
+                            store: 'Kabum',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Placa de Vídeo RX 6600 8GB',
+                            price: 'R$ 1.599,00',
+                            originalPrice: 'R$ 1.999,00',
+                            discount: '-20%',
+                            image: 'https://via.placeholder.com/100x100?text=GPU',
+                            link: 'https://exemplo.com/gpu-3',
+                            store: 'Pichau',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Placa-Mãe A520M',
+                            price: 'R$ 549,00',
+                            originalPrice: 'R$ 699,00',
+                            discount: '-21%',
+                            image: 'https://via.placeholder.com/100x100?text=Placa-Mae',
+                            link: 'https://exemplo.com/placa-mae-3',
+                            store: 'Amazon',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Memória RAM 16GB (2x8GB) 3000MHz',
+                            price: 'R$ 249,00',
+                            originalPrice: 'R$ 399,00',
+                            discount: '-38%',
+                            image: 'https://via.placeholder.com/100x100?text=RAM',
+                            link: 'https://exemplo.com/ram-3',
+                            store: 'Kabum',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'SSD 512GB SATA',
+                            price: 'R$ 249,00',
+                            originalPrice: 'R$ 349,00',
+                            discount: '-29%',
+                            image: 'https://via.placeholder.com/100x100?text=SSD',
+                            link: 'https://exemplo.com/ssd-3',
+                            store: 'Terabyte',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Fonte 550W 80 Plus',
+                            price: 'R$ 299,00',
+                            originalPrice: 'R$ 399,00',
+                            discount: '-25%',
+                            image: 'https://via.placeholder.com/100x100?text=Fonte',
+                            link: 'https://exemplo.com/fonte-3',
+                            store: 'Pichau',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        },
+                        {
+                            name: 'Gabinete Gamer Mid Tower',
+                            price: 'R$ 249,00',
+                            originalPrice: 'R$ 349,00',
+                            discount: '-29%',
+                            image: 'https://via.placeholder.com/100x100?text=Gabinete',
+                            link: 'https://exemplo.com/gabinete-3',
+                            store: 'Amazon',
+                            storeLogo: '/placeholder.svg?height=40&width=40'
+                        }
+                    ]
+                }
+            ],
+            'notebooks': [
+                {
+                    name: 'Notebook Gamer RTX 4050 15.6"',
+                    price: 'R$ 5.499,00',
+                    originalPrice: 'R$ 6.999,00',
+                    discount: '-21%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/notebook-1',
+                    coupon: 'NOTEBOOK50',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Notebook Gamer AMD Ryzen 7 + RX 6600M',
+                    price: 'R$ 4.799,00',
+                    originalPrice: 'R$ 5.999,00',
+                    discount: '-20%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/notebook-2',
+                    store: 'Mercado Livre',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'teclado': [
+                {
+                    name: 'Teclado Mecânico RGB Gamer',
+                    price: 'R$ 349,90',
+                    originalPrice: 'R$ 499,90',
+                    discount: '-30%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/teclado-1',
+                    coupon: 'TECLADO20',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Teclado Gamer Sem Fio',
+                    price: 'R$ 279,90',
+                    originalPrice: 'R$ 399,90',
+                    discount: '-30%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/teclado-2',
+                    store: 'Pichau',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+				{
+				name: 'Fgg mad60 gaming',
+				price: 'R$ 170,77',
+				originalPrice: 'R$ 299,00',
+				discount: '-43%',
+				image: 'imagens/perifericoseacessorios/teclado/mad60.png',
+				link: 'https://pt.aliexpress.com/item/1005009141610252.html?spm=a2g0o.productlist.main.56.63a4QU8EQU8E27',
+				coupon: 'TESTE100',
+				store: 'AliExpress',
+				storeLogo: '/placeholder.svg?height=40&width=40'
+				}
+            ],
+            'mouse': [
+                {
+                    name: 'Mouse Gamer 16000 DPI RGB',
+                    price: 'R$ 189,90',
+                    originalPrice: 'R$ 299,90',
+                    discount: '-37%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/mouse-1',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Mouse Gamer Sem Fio Pro',
+                    price: 'R$ 299,90',
+                    originalPrice: 'R$ 449,90',
+                    discount: '-33%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/mouse-2',
+                    coupon: 'MOUSE10',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'monitor': [
+                {
+                    name: 'Monitor Gamer 27" 165Hz',
+                    price: 'R$ 1.299,00',
+                    originalPrice: 'R$ 1.799,00',
+                    discount: '-28%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/monitor-1',
+                    store: 'Pichau',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Monitor Ultrawide 34" 144Hz',
+                    price: 'R$ 2.199,00',
+                    originalPrice: 'R$ 2.999,00',
+                    discount: '-27%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/monitor-2',
+                    coupon: 'ULTRAWIDE100',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'headset': [
+                {
+                    name: 'Headset Gamer 7.1 Surround',
+                    price: 'R$ 249,90',
+                    originalPrice: 'R$ 399,90',
+                    discount: '-38%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/headset-1',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Headset Gamer Sem Fio Premium',
+                    price: 'R$ 449,90',
+                    originalPrice: 'R$ 649,90',
+                    discount: '-31%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/headset-2',
+                    coupon: 'HEADSET20',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'cadeira': [
+                {
+                    name: 'Cadeira Gamer Ergonômica Pro',
+                    price: 'R$ 899,00',
+                    originalPrice: 'R$ 1.299,00',
+                    discount: '-31%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/cadeira-1',
+                    store: 'Mercado Livre',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Cadeira Gamer Premium RGB',
+                    price: 'R$ 1.299,00',
+                    originalPrice: 'R$ 1.799,00',
+                    discount: '-28%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/cadeira-2',
+                    coupon: 'CADEIRA50',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'mesa': [
+                {
+                    name: 'Mesa Gamer com LED RGB 120cm',
+                    price: 'R$ 599,00',
+                    originalPrice: 'R$ 899,00',
+                    discount: '-33%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/mesa-1',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Mesa Gamer Profissional 150cm',
+                    price: 'R$ 899,00',
+                    originalPrice: 'R$ 1.299,00',
+                    discount: '-31%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/mesa-2',
+                    coupon: 'MESA25',
+                    store: 'Pichau',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'placa-mae': [
+                {
+                    name: 'Placa-Mãe B550 Gaming',
+                    price: 'R$ 899,00',
+                    originalPrice: 'R$ 1.199,00',
+                    discount: '-25%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/placa-mae-1',
+                    store: 'Terabyte',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Placa-Mãe X570 Pro',
+                    price: 'R$ 1.299,00',
+                    originalPrice: 'R$ 1.699,00',
+                    discount: '-24%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/placa-mae-2',
+                    store: 'Pichau',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'processador': [
+                {
+                    name: 'Processador AMD Ryzen 5 5600X',
+                    price: 'R$ 899,00',
+                    originalPrice: 'R$ 1.199,00',
+                    discount: '-25%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/processador-1',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Processador Intel Core i5-12400F',
+                    price: 'R$ 949,00',
+                    originalPrice: 'R$ 1.299,00',
+                    discount: '-27%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/processador-2',
+                    coupon: 'CPU40',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'armazenamento': [
+                {
+                    name: 'SSD NVMe 1TB PCIe 4.0',
+                    price: 'R$ 449,00',
+                    originalPrice: 'R$ 649,00',
+                    discount: '-31%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/ssd-1',
+                    coupon: 'SSD1TBPROMO',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'SSD NVMe 2TB PCIe 4.0',
+                    price: 'R$ 799,00',
+                    originalPrice: 'R$ 1.099,00',
+                    discount: '-27%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/ssd-2',
+                    store: 'Pichau',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'memoria-ram': [
+                {
+                    name: 'Memória RAM 16GB (2x8GB) 3200MHz',
+                    price: 'R$ 299,00',
+                    originalPrice: 'R$ 449,00',
+                    discount: '-33%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/ram-1',
+                    store: 'Terabyte',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Memória RAM 32GB (2x16GB) 3600MHz',
+                    price: 'R$ 549,00',
+                    originalPrice: 'R$ 799,00',
+                    discount: '-31%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/ram-2',
+                    coupon: 'RAM32GB',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'placa-video': [
+                {
+                    name: 'Placa de Vídeo RTX 4060 8GB',
+                    price: 'R$ 2.199,00',
+                    originalPrice: 'R$ 2.799,00',
+                    discount: '-21%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/gpu-1',
+                    store: 'Pichau',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Placa de Vídeo RX 6700 XT 12GB',
+                    price: 'R$ 2.499,00',
+                    originalPrice: 'R$ 3.199,00',
+                    discount: '-22%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/gpu-2',
+                    coupon: 'GPU100OFF',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'fonte': [
+                {
+                    name: 'Fonte 650W 80 Plus Bronze Modular',
+                    price: 'R$ 399,00',
+                    originalPrice: 'R$ 549,00',
+                    discount: '-27%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/fonte-1',
+                    store: 'Terabyte',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Fonte 750W 80 Plus Gold Full Modular',
+                    price: 'R$ 599,00',
+                    originalPrice: 'R$ 849,00',
+                    discount: '-29%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/fonte-2',
+                    coupon: 'FONTE750',
+                    store: 'Amazon',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ],
+            'gabinete': [
+                {
+                    name: 'Gabinete Gamer Mid Tower RGB',
+                    price: 'R$ 349,00',
+                    originalPrice: 'R$ 499,00',
+                    discount: '-30%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/gabinete-1',
+                    store: 'Kabum',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                },
+                {
+                    name: 'Gabinete Gamer Full Tower Vidro Temperado',
+                    price: 'R$ 599,00',
+                    originalPrice: 'R$ 849,00',
+                    discount: '-29%',
+                    image: '/placeholder.svg?height=180&width=180',
+                    link: 'https://exemplo.com/gabinete-2',
+                    store: 'Pichau',
+                    storeLogo: '/placeholder.svg?height=40&width=40'
+                }
+            ]
+        };
+
+        const questions = [
+            {
+                id: 1,
+                question: 'O que você está procurando?',
+                options: [
+                    { value: 'pc-pronto', label: 'PC Pronto', image: 'imagens/pcpronto/pc.png' },
+                    { value: 'notebooks', label: 'Notebooks', image: 'imagens/notebooks/notebook.png' },
+                    { value: 'perifericos-acessorios', label: 'Periféricos e Acessórios', image: 'imagens/perifericoseacessorios/perifericos.png' },
+                    { value: 'componentes', label: 'Componentes', image: 'imagens/componentes/componentes.png' }
+                ]
+            },
+            {
+                id: 2,
+                question: 'Qual periférico ou acessório você precisa?',
+                showIf: (answers) => answers[1] === 'perifericos-acessorios',
+                options: [
+                    { value: 'teclado', label: 'Teclado', image: 'imagens/perifericoseacessorios/teclado/teclado.png' },
+                    { value: 'mouse', label: 'Mouse', image: 'imagens/perifericoseacessorios/mouse/mouse.png' },
+                    { value: 'monitor', label: 'Monitor', image: 'imagens/perifericoseacessorios/monitor/monitor.png' },
+                    { value: 'headset', label: 'Headset', image: 'imagens/perifericoseacessorios/fone/fone.png' },
+                    { value: 'cadeira', label: 'Cadeira Gamer', image: 'imagens/perifericoseacessorios/cadeira/cadeira.png' },
+                    { value: 'mesa', label: 'Mesa Gamer', image: 'imagens/perifericoseacessorios/mesa/mesa.png' }
+                ]
+            },
+            {
+                id: 3,
+                question: 'Qual componente você precisa?',
+                showIf: (answers) => answers[1] === 'componentes',
+                options: [
+                    { value: 'placa-mae', label: 'Placa-Mãe', image: 'imagens/componentes/placamae/placamae.png' },
+                    { value: 'processador', label: 'Processador (CPU)', image: 'imagens/componentes/cpu/cpu.png' },
+                    { value: 'armazenamento', label: 'Armazenamento', image: 'imagens/componentes/armazenamento/armazenamento.png' },
+                    { value: 'memoria-ram', label: 'Memória RAM', image: 'imagens/componentes/memoria/memoria.png' },
+                    { value: 'placa-video', label: 'Placa de Vídeo', image: 'imagens/componentes/placavideo/placavideo.png' },
+                    { value: 'fonte', label: 'Fonte de Alimentação', image: 'imagens/componentes/fonte/fonte.png' },
+                    { value: 'gabinete', label: 'Gabinete', image: 'imagens/componentes/gabinete/gabinete.png' }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = {};
+
+        function copyCoupon(code, buttonElement) {
+            // Copy to clipboard
+            navigator.clipboard.writeText(code).then(() => {
+                // Find the feedback element
+                const couponBox = buttonElement.closest('.coupon-box');
+                const feedback = couponBox.querySelector('.coupon-feedback');
+                
+                // Show feedback
+                feedback.classList.add('show');
+                
+                // Hide feedback after 2 seconds
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar cupom:', err);
+                alert('Cupom: ' + code);
+            });
+        }
+
+        function createCouponBox(coupon) {
+            if (!coupon) return '';
+            
+            return `
+
+                <div class="coupon-box">
+                    <div class="coupon-content">
+                        <span class="coupon-label">Cupom de desconto</span>
+                        <span class="coupon-code">${coupon}</span>
+                    </div>
+                    <button class="coupon-copy-btn" onclick="copyCoupon('${coupon}', this)">
+                        <svg class="coupon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                        Copiar
+                    </button>
+                    <div class="coupon-feedback">Copiado!</div>
+                </div>
+            `;
+        }
+
+        function renderQuestion() {
+            const question = questions[currentQuestion];
+            
+            // Check if question should be shown
+            if (question.showIf && !question.showIf(answers)) {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    renderQuestion();
+                } else {
+                    showResults();
+                }
+                return;
+            }
+
+            const quizContent = document.getElementById('quizContent');
+            quizContent.innerHTML = `
+                <div class="question-container">
+                    <h2 class="question-title">${question.question}</h2>
+                    <div class="options-grid">
+                        ${question.options.map(option => `
+                            <div class="option-card" data-value="${option.value}">
+                                <img src="${option.image}" alt="${option.label}" class="option-image">
+                                <div class="option-title">${option.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${currentQuestion > 0 ? '<div class="quiz-buttons"><button class="btn btn-secondary" onclick="previousQuestion()">Voltar</button></div>' : ''}
+                </div>
+            `;
+
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    answers[question.id] = card.dataset.value;
+                    
+                    // Automatically advance after brief delay for visual feedback
+                    setTimeout(() => {
+                        nextQuestion();
+                    }, 400);
+                });
+            });
+
+            updateProgress();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                // Remove the answer for the current question
+                delete answers[questions[currentQuestion].id];
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            let selectedCategory = answers[1];
+            
+            // If user selected perifericos-acessorios or componentes, get the specific item
+            if (selectedCategory === 'perifericos-acessorios') {
+                selectedCategory = answers[2];
+            } else if (selectedCategory === 'componentes') {
+                selectedCategory = answers[3];
+            }
+
+            const recommendedProducts = products[selectedCategory] || [];
+
+            document.querySelector('.quiz-header').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('progressBar').parentElement.style.display = 'none';
+            
+            const resultsContainer = document.getElementById('resultsContainer');
+            const productGrid = document.getElementById('productGrid');
+            
+            // Special handling for PC Pronto - show components list
+            if (selectedCategory === 'pc-pronto') {
+                productGrid.innerHTML = recommendedProducts.map(product => `
+                    <div class="pc-complete-container">
+                        <div class="pc-header">
+                            <h3 class="pc-name">${product.name}</h3>
+                            <div class="pc-total-price">${product.price}</div>
+                            ${createCouponBox(product.coupon)}
+                        </div>
+                        <div class="components-list">
+                            ${product.components.map(component => `
+                                <div class="component-item">
+                                    <img src="${component.image}" alt="${component.name}" class="component-image">
+                                    <div class="component-info">
+                                        <div class="component-name">${component.name}</div>
+                                        <div class="component-price">${component.price}</div>
+                                        ${createCouponBox(component.coupon)}
+                                    </div>
+                                    <a href="${component.link}" target="_blank" class="component-link">Ver Oferta</a>
+                                    <div class="product-disclaimer">*Preço e disponibilidade sujeito a alteração a qualquer momento.</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                productGrid.innerHTML = recommendedProducts.map(product => `
+                    <div class="product-card">
+                        <div class="product-store-header">
+                            <div class="store-logo">
+                                <img src="${product.storeLogo}" alt="${product.store}">
+                            </div>
+                            <div>
+                                <div class="store-text">Promoção da loja:</div>
+                                <div class="store-name">${product.store}</div>
+                            </div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-pricing">
+                                ${product.originalPrice ? `<div class="product-price-original">De ${product.originalPrice}</div>` : ''}
+                                <div class="product-price-container">
+                                    <div class="product-price">${product.price}</div>
+                                    ${product.discount ? `<div class="product-discount">${product.discount}</div>` : ''}
+                                </div>
+                            </div>
+                            ${createCouponBox(product.coupon)}
+                            <a href="${product.link}" target="_blank" class="product-link">
+                                <svg class="product-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                Pegar promoção
+                            </a>
+                            <div class="product-disclaimer">*Preço e disponibilidade sujeito a alteração a qualquer momento.</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            resultsContainer.classList.add('active');
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            document.querySelector('.quiz-header').style.display = 'block';
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('progressBar').parentElement.style.display = 'block';
+            document.getElementById('resultsContainer').classList.remove('active');
+            renderQuestion();
+        }
+
+        // Initialize quiz
+        renderQuestion();
+    </script>
+</body>
+</html>
